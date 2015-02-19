@@ -1,12 +1,27 @@
+Npm.depends({"node-twitter": "0.5.2"});
+
 Package.describe({
-  summary: "Twitter package for Meteor"
+  name: 'kaaposc:meteor-twitter',
+  version: '0.0.1',
+  // Brief, one-line summary of the package.
+  summary: 'Twitter package for meteor',
+  // URL to the Git repository containing the source code for this package.
+  git: 'https://github.com/kaaposc/meteor-twitter',
+  // By default, Meteor will default to using README.md for documentation.
+  // To avoid submitting documentation, set this field to null.
+  documentation: 'README.md'
 });
 
-Npm.depends({"node-twitter": "0.5.1"});
-
-Package.on_use(function (api) {
-  api.add_files("main.js", "server");
-  if(api.export) {
-    api.export('Twitter');
+Package.onUse(function(api) {
+  api.versionsFrom('1.0.3.1');
+  api.addFiles('kaaposc:meteor-twitter.js', 'server');
+  if (api.export) {
+    api.export('Twitter', 'server');
   }
+});
+
+Package.onTest(function(api) {
+  api.use('tinytest');
+  api.use('kaaposc:meteor-twitter');
+  api.addFiles('kaaposc:meteor-twitter-tests.js');
 });
